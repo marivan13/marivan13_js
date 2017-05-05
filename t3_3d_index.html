@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina_3_3</title>
+      <meta charset="utf-8">
+  <p> Используя массив объектов с информацией о товарах, преобразуйте цены товаров из UAH в USD.
+  </p>
+  <p id="pstr">
+  </p>
+  <input type= "button" id="btn" value="Convert TO USD">
+  <p id ="result"></p>
+
+  <script type="text/javascript">
+
+  var strMain = "Lenovo A378T, 1649UAH; Lenovo A396, 1502UAH; Lenovo A369, 1388UAH; Lenovo A399,1688UAH;Lenovo A376, 1412UAH; Lenovo A398T,1608UAH; Lenovo A300T, 1444UAH ; Lenovo A360,1750UAH ; Lenovo A2800D, 1640UAH; Lenovo A678T,1799UAH; Lenovo A388T, 1710UAH; Lenovo A606, 1789UAH; Lenovo A398T, 1600UAH; Lenovo A1900,1569UAH; Lenovo A238T,1496UAH; Lenovo A66,1533UAH";
+  document.getElementById("pstr").innerHTML = strMain;
+
+  var btn = document.getElementById("btn");
+  btn.addEventListener("click", convertPriceToUSD);
+
+  function convertPriceToUSD() {
+    var good;
+    var arrGoods = [];
+    var goods = strMain.split(';');
+
+    goods.forEach(function(elem)
+    {
+      good = elem.split(',');
+      arrGoods.push(
+      {
+        name : good[0],
+        price: good[1]
+      });
+    });
+
+    var goodsUsd = arrGoods.map(function(elem){
+      var priceUSD = (parseInt(elem.price)/27).toFixed(2)+'USD';
+      document.getElementById("result").innerHTML += "<b>Name:</b> " + elem.name + " <b>Price USD:</b> " + priceUSD + "<br>";
+      return {name:elem.name, price:priceUSD}
+    });
+    console.log(goodsUsd);
+    }
+
+  </script>
+  </head>
+  <body>
+  </body>
+</html>
