@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina_calc_4</title>
+      <meta charset="utf-8">
+    <style>
+    #background
+    {
+      width: 226px;
+      height: 100px;
+      background: #4682B4;
+    }
+    .row
+    {
+      margin: 10px auto;
+      position: relative;
+      top: 10px;
+      left: 10px;
+    }
+    #result
+    {
+      width: 200px;
+      height: 30px;
+      text-align: right;
+      font-size: 20px;
+    }
+    .btn-style{
+      width: 206px;
+      height: 30px;
+      border: 0;
+      font-size: 20px;
+      text-align: center;
+    }
+    </style>
+  </head>
+  <body>
+  <div id="background">
+    <div class="row">
+      <input type="text" id="result">
+    </div>
+    <div class="row">
+      <input type="button" value="Calculate" id="equal" class="btn-style">
+    </div>
+  </div>
+    <script src="calc.js"></script>
+    <script type="text/javascript">
+
+    var inputNumOperators = "0123456789/*-+"
+
+    document.getElementById("result").addEventListener("keypress", function()
+    {
+      if (inputNumOperators.indexOf(event.key) === -1)
+      {
+        event.returnValue = false;
+      }
+    });
+
+    document.getElementById("equal").addEventListener("click", function()
+    {
+      var result = document.getElementById("result").value;
+      if (result === '')
+      {
+        document.getElementById("result").value = "Please, enter what to calculate!!!";
+        return;
+      }
+
+      var outputArrNumOperators = parseStringNumOPeratorsToArray(result);
+      console.log(outputArrNumOperators);
+      document.getElementById("result").value = calcFromArray(outputArrNumOperators);
+    });
+
+    </script>
+  </body>
+</html>

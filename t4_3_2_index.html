@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina_calc_2</title>
+      <meta charset="utf-8">
+    <style>
+    .row
+    {
+      margin: 10px auto;
+      position: relative;
+      top: 10px;
+      left: 10px;
+    }
+    #result
+    {
+      width: 127px;
+      height: 30px;
+      text-align: right;
+    }
+    .btn-style{
+      width: 30px;
+      height: 30px;
+      border: 0;
+      font-size: 20px;
+    }
+    </style>
+  </head>
+  <body>
+  <div class="row">
+    <input type="number" id="result">
+  </div>
+  <div class="row">
+    <input type="button" value="/" id="divide" class="btn-style operator">
+    <input type="button" value="*" id="multiply" class="btn-style operator">
+    <input type="button" value="+" id="add" class="btn-style operator">
+    <input type="button" value="-" id="subtract" class="btn-style operator">
+  </div>
+  <div class="row">
+    <input type="button" value="=" id="equal" class="btn-style">
+  </div>
+    <script src="calc.js"></script>
+    <script type="text/javascript">
+
+    var result = document.getElementById("result");
+    var operators = document.getElementsByClassName("operator");
+    var calcarray = [];
+    var operand, operation;
+
+    for (operator of operators)
+    {
+      console.log(operator);
+      operator.addEventListener("click", function()
+      {
+        calcarray.push(result.value);
+        calcarray.push(this.value);
+
+        document.getElementById("result").value = "";
+        console.log(calcarray);
+      });
+    }
+
+    document.getElementById("equal").addEventListener("click", function()
+    {
+        calcarray.push(result.value);
+        result.value = calcFromArray(calcarray);
+        calcarray = [];
+    });
+
+    </script>
+  </body>
+</html>

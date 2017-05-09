@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina_calc_1</title>
+      <meta charset="utf-8">
+    <style></style>
+  </head>
+  <body>
+  <div>
+    <input type="number" id="firstoperand">
+    <input type="number" id="secondoperand">
+    <input type="text" id="result" readonly="readonly">
+  </div>
+  <div>
+    <input type="button" value="/" id="divide" class="operator">
+    <input type="button" value="*" id="multiply" class="operator">
+    <input type="button" value="+" id="add" class="operator">
+    <input type="button" value="-" id="subtract" class="operator">
+  </div>
+    <script src="calc.js"></script>
+    <script type="text/javascript">
+
+    var operators = document.getElementsByClassName("operator");
+
+  /*for (i=0;i<operators.length;i++)
+    {
+      operators[i].addEventListener("click",calc);
+    }*/
+    for (operator of operators)
+    {
+      console.log(operator);
+      operator.addEventListener("click",calc);
+    }
+
+    function calc() {
+      var firstoperand = +document.getElementById("firstoperand").value;
+      var secondoperand = +document.getElementById("secondoperand").value;
+      var operator = this.value;
+      switch (operator){
+        case '/':
+          result = calcDivide(firstoperand,secondoperand);
+          break;
+        case '*':
+          result = calcMultiply(firstoperand,secondoperand);
+          break;
+        case '+':
+          result = calcAdd(firstoperand,secondoperand);
+          break;
+        case '-':
+          result = calcSubtract(firstoperand,secondoperand);
+          break;
+        default:
+          break;
+      }
+      if (result === Infinity || result === -Infinity || result === NaN)
+      {
+        document.getElementById("result").value = "OOPS!!! You did wrong operation!!!"
+        return;
+      }
+      document.getElementById("result").value = result.toFixed(2);
+    }
+    </script>
+  </body>
+</html>

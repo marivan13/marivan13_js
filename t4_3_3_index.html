@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina_calc_3</title>
+      <meta charset="utf-8">
+    <style>
+    #calcbackground{
+      width: 260px;
+      height: 372px;
+      background: #4682B4;
+    }
+
+    #calcresult{
+      display: block;
+      width: 230px;
+      height: 50px;
+      text-align: right;
+      background: #B0C4DE;
+      margin: 10px auto;
+      position: relative;
+      top: 10px;
+      font-size: 30px;
+      font-family: sans-serif;
+      overflow: hidden;
+
+    }
+
+    #calcresult:hover{
+      cursor: text;
+    }
+
+    #clear
+    {
+      width: 170px;
+    }
+
+    #point
+    {
+      width: 110px;
+    }
+
+    .row{
+      width: 260px;
+      margin: 10px auto;
+      position: relative;
+      top: 10px;
+      left: 10px;
+    }
+
+    .btn-style{
+      width: 50px;
+      height: 50px;
+      margin-left: 5px;
+      border: 0;
+      font-size: 30px;
+    }
+
+    .num-bg{
+      background: #ADD8E6;
+    }
+
+    .zero-bg{
+      background: #ADD8E6;
+    }
+
+    .operator-bg{
+      background: #F08080;
+    }
+
+    </style>
+  </head>
+  <body>
+  <div id="calcbackground">
+    <div id="calcresult">
+    </div>
+    <div class="row">
+      <input type="button" value="7" class="btn-style num-bg">
+      <input type="button" value="8" class="btn-style num-bg">
+      <input type="button" value="9" class="btn-style num-bg">
+      <input type="button" value="+" id="add" class="btn-style operator-bg operator ">
+    </div>
+    <div class="row">
+      <input type="button" value="4" class="btn-style num-bg">
+      <input type="button" value="5" class="btn-style num-bg">
+      <input type="button" value="6" class="btn-style num-bg">
+      <input type="button" value="-" id="subtract" class="btn-style operator-bg operator">
+    </div>
+    <div class="row">
+      <input type="button" value="1" class="btn-style num-bg">
+      <input type="button" value="2" class="btn-style num-bg">
+      <input type="button" value="3" class="btn-style num-bg">
+      <input type="button" value="*" id="add" class="btn-style operator-bg operator">
+    </div>
+    <div class="row">
+      <input type="button" value="0" id="zero" class="btn-style zero-bg">
+      <input type="button" value="." id="point" class="btn-style">
+      <input type="button" value="/" id="divide" class="btn-style operator-bg operator">
+    </div>
+    <div class="row">
+      <input type="button" value="Clear" id="clear" class="btn-style">
+      <input type="button" value="=" id="equal" class="btn-style operator-bg">
+    </div>
+  </div>
+    <script type="text/javascript">
+
+      var calcresult= document.getElementById("calcresult");
+      var nums= document.querySelectorAll(".num-bg");
+
+      var operator, result, operand, point, zero;
+
+      //add event to num buttons
+      for (num of nums)
+      {
+        num.addEventListener("click", function()
+        {
+          number = this.value;
+          result = calcresult.innerHTML += number;
+        });
+      }
+      console.log(result);
+      console.log(calcresult.innerHTML);
+
+      //add event to operators
+      var operators = document.querySelectorAll(".operator");
+      for ( operatorElem of operators)
+      {
+        operatorElem.addEventListener("click", function()
+        {
+          if (calcresult.innerHTML === "")
+          {
+            calcresult.innerHTML = calcresult.innerHTML.concat("");
+          }
+          else if (result)
+          {
+            operator = this.value;
+            calcresult.innerHTML = result.concat(operator);
+          }
+          console.log(result);
+          console.log(calcresult.innerHTML);
+        });
+      }
+
+      //add event to equal button
+      document.getElementById("equal").addEventListener("click", function()
+      {
+          if (calcresult.innerHTML === result)
+          {
+              calcresult.innerHTML = eval(result);
+          }
+          else {
+            calcresult.innerHTML="";
+          }
+          console.log(result);
+          console.log(calcresult.innerHTML);
+      });
+
+      //add event to point button
+      document.getElementById("point").addEventListener("click", function()
+      {
+        point = this.value;
+        if (calcresult.innerHTML === "")
+        {
+          result = calcresult.innerHTML = calcresult.innerHTML.concat("0.");
+        }
+        else if (calcresult.innerHTML === result) {
+          calcresult.innerHTML = calcresult.innerHTML.concat(".");
+        }
+        console.log(result);
+        console.log(calcresult.innerHTML);
+      });
+
+      //add event to zero
+      document.getElementById("zero").addEventListener("click", function()
+      {
+        zero = this.value;
+
+        if(calcresult.innerHTML === "") {
+           result = calcresult.innerHTML = zero;
+        }
+        else if(calcresult.innerHTML === result) {
+         result = calcresult.innerHTML +=zero;
+        }
+
+
+      });
+      //add event to clear button
+      document.getElementById("clear").addEventListener("click", function()
+      {
+        calcresult.innerHTML="";
+      });
+
+    </script>
+  </body>
+</html>
