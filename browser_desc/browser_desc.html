@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>DOM examples</title>
+		<style type="text/css">
+			body {
+				margin:0;
+				padding:0;
+				font-family: sans-serif;
+			}
+			.br-desc {
+				border: 1px solid #aaaaaa;
+				margin: 20px auto;
+				width: 600px;
+				background-color: #FFFAAE;
+			}
+			h2 {
+				margin: 0;
+				padding: 5px;
+				padding-left: 30px;
+				background-color: #22aaaa;
+				font-size: 20px;
+				line-height: 20px;
+				font-family: serif;
+			}
+			img {
+				float: left;
+				display: block;
+				padding: 10px;
+			}
+			.devs, .engine,  .os {
+				clear: both;
+				padding: 0 10px;
+				margin: 5px;
+			}
+			.devs_hd, .engine_hd, .os_hd {
+				font-weight: bold;
+			}
+			.frame_open {
+				float: left;
+				font-size: 16px;
+				line-height: 16px;
+				padding: 5px;
+				width: 20px;
+			}
+
+
+		</style>
+	</head>
+	<body>
+
+	<div id="" class="br-desc">
+		<div>
+			<div id="" class="frame_open">[-]</div>
+			<h2>Mozilla Firefox</h2>
+		</div>
+		<img src="img/firefox_128.png" width="128" height="128" alt="This is an icon of Mozilla Firefox" title="You're pointing to an icon of Mozilla Firefox">
+		<p id="" class="">Mozilla Firefox (known simply as Firefox) is a free and open-source[17] web browser developed for Windows, OS X, and Linux, with a mobile version for Android, by the Mozilla Foundation and its subsidiary, the Mozilla Corporation. Firefox uses the Gecko layout engine to render web pages, which implements current and anticipated web standards.</p>
+
+		<p id="" class="devs"><span class="devs_hd">Developer(s):</span>Mozilla Foundation</p>
+		<p id="" class="engine"><span class="engine_hd">Engines:</span>Gecko, SpiderMonkey</p>
+		<p id="" class="os"><span class="os_hd">Operating system:</span>Windows, Unix, Android</p>
+	</div>
+
+	<div id="" class="br-desc">
+		<div>
+			<div id="" class="frame_open">[-]</div>
+			<h2>Safari</h2>
+		</div>
+		<img src="img/safari_128.png" width="128" height="128" alt="This is an icon of Safari" title="You're pointing to an icon of Safari">
+		<p id="" class="">Safari is a web browser developed by Apple Inc. and included with the OS X and iOS operating systems. First released as a public beta on January 7, 2003,[3] on the company's OS X operating system, it became Apple's default browser beginning with Mac OS X v10.3 "Panther". Safari is also the native browser for iOS.</p>
+
+		<p id="" class="devs"><span class="devs_hd">Developer(s):</span>Apple Inc.</p>
+		<p id="" class="engine"><span class="engine_hd">Engines:</span>WebKit, Nitro</p>
+		<p id="" class="os"><span class="os_hd">Operating system:</span>OS X, iOS, Windows</p>
+	</div>
+
+	<div id="" class="br-desc">
+		<div>
+			<div id="" class="frame_open">[-]</div>
+			<h2>Internet Explorer</h2>
+		</div>
+		<img src="img/ie_128.png" width="128" height="128" alt="This is an icon of Internet Explorer" title="You're pointing to an icon of Internet Explorer">
+		<p id="" class="">Internet Explorer (formerly Microsoft Internet Explorer and Windows Internet Explorer, commonly abbreviated IE or MSIE) is a series of graphical web browsers developed by Microsoft and included as part of the Microsoft Windows line of operating systems, starting in 1995. It was first released as part of the add-on package Plus! for Windows 95 that year. Later versions were available as free downloads, or in service packs, and included in the Original Equipment Manufacturer (OEM) service releases of Windows 95 and later versions of Windows.</p>
+
+		<p id="" class="devs"><span class="devs_hd">Developer(s):</span>Microsoft</p>
+		<p id="" class="engine"><span class="engine_hd">Engines:</span>Trident, Chakra</p>
+		<p id="" class="os"><span class="os_hd">Operating system:</span>Windows, Mac OS X, Solaris OS, HP-UX</p>
+	</div>
+
+	<div id="" class="br-desc">
+		<div>
+			<div id="" class="frame_open">[-]</div>
+			<h2>Netscape Navigator</h2>
+		</div>
+		<img src="img/netscape_128.png" width="128" height="128" alt="This is an icon of Netscape Navigator" title="You're pointing to an icon of Netscape Navigator">
+		<p id="" class="">Netscape was the general name for a series of web browsers originally produced by Netscape Communications Corporation, now a subsidiary of AOL. The original browser was once the dominant browser in terms of usage share, but as a result of the first browser war, it lost virtually all of its share to Internet Explorer.</p>
+
+		<p id="" class="devs"><span class="devs_hd">Developer(s):</span>Netscape Communications AOL</p>
+		<p id="" class="engine"><span class="engine_hd">Engines:</span>Gecko</p>
+		<p id="" class="os"><span class="os_hd">Operating system:</span>Windows, Unix</p>
+	</div>
+
+	<div id="" class="br-desc">
+		<div>
+			<div id="" class="frame_open">[-]</div>
+			<h2>Google Chrome</h2>
+		</div>
+		<img src="img/chrome_128.png" width="128" height="128" alt="This is an icon of Mozilla Firefox" title="You're pointing to an icon of Mozilla Firefox">
+		<p id="" class="">Google Chrome is a freeware web browser[9] developed by Google. It used the WebKit layout engine until version 27 and, with the exception of its iOS releases, from version 28 and beyond uses the WebKit fork Blink.[10][11][12] It was first released as a beta version for Microsoft Windows on September 2, 2008, and as a stable public release on December 11, 2008.</p>
+
+		<p id="" class="devs"><span class="devs_hd">Developer(s):</span>Google Inc.</p>
+		<p id="" class="engine"><span class="engine_hd">Engines:</span>Blink (WebKit on iOS), V8</p>
+		<p id="" class="os"><span class="os_hd">Operating system:</span>Windows, Unix, Android, iOS</p>
+	</div>
+	</body>
+		<script type="text/javascript">
+
+			var frameopenelements = document.getElementsByClassName("frame_open");
+			
+			for (element of frameopenelements)
+			{
+				element.addEventListener("click", function()
+				{
+					let framestatus = this.innerHTML;
+					if (framestatus === '[-]')
+					{
+						this.innerHTML = "[+]";
+						openclosedesc(this.parentElement.parentElement.children, 'none');
+					}
+					else {
+						this.innerHTML = "[-]";
+						openclosedesc(this.parentElement.parentElement.children, 'block');
+					}
+				});
+			}
+
+			function openclosedesc(description, status)
+			{
+				for (i=1; i<description.length; i++)
+				{
+					description[i].style.display = status;
+				}
+			}
+			</script>
+</html>
