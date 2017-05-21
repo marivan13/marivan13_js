@@ -136,9 +136,10 @@
 			const closeSign = "[+]";
 
 			var timerOpen, timerClose;
-			var divDescription, divDescriptionHeight;
+			var divDescription, divDescriptionHeight, divID;
 			var divHeight;
-			var openCloseFlag;
+			var objHeight = {};
+			var openCloseFlag = false;
 
 			var frameOpenElements = document.getElementsByClassName("frame_open");
 			var divDescriptions = document.getElementsByClassName("desc");
@@ -151,17 +152,16 @@
 						return;
 					}
 					let frameStatus = this.innerHTML;
-					let divID = this.id.concat("_div");
+					divID = this.id.concat("_div");
 
 					divDescription = document.getElementById(divID);
 					divDescriptionHeight = parseFloat(getComputedStyle(divDescription).height);
-					// <--Didn't know what to do with heigh when open description ???
-					console.dir(divDescription);
-					console.dir(divDescription.style);
 
 					if (frameStatus === openSign)
 					{
-						divHeight = divDescriptionHeight; 	// <--Didn't know what to do with height when open description ???
+						objHeight[divID] = divDescriptionHeight;
+						console.dir(objHeight);
+						console.log(objHeight[divID]);
 						timerClose = setInterval(closeDescription, 5);
 						this.innerHTML = closeSign;
 
@@ -193,7 +193,7 @@
 			{
 				openCloseFlag = true;
 				divDescriptionHeight+=1;
-				if (divDescriptionHeight > divHeight){
+				if (divDescriptionHeight >= objHeight[divID]){
 					divDescription.style.height = divDescriptionHeight + "px";
 					clearInterval(timerOpen);
 					openCloseFlag = false;
