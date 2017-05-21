@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+    <style type="text/css">
+      ul {
+        list-style-type: none;
+      }
+      li {
+        background-image: url("rating/whitestar.png");
+        background-repeat:no-repeat;;
+        background-size: contain;
+        width: 100px;
+        height: 100px;
+        float:left;
+      }
+      #raiting{
+        margin-top: 50px;
+        margin-left: 50px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="raiting">
+    </div>
+      <script type="text/javascript">
+
+      var ratingElementsCount = 5;
+
+      var ul = document.createElement('ul');
+      document.getElementsByTagName('div')[0].appendChild(ul);
+
+      for (var i = 0; i < ratingElementsCount; i++) {
+        var li = document.createElement('li');
+        li.setAttribute('id', 'rating'+ i);
+        li.isclicked = false;
+        ul.appendChild(li);
+      }
+
+      var ratingElements = document.getElementsByTagName('li');
+
+      document.addEventListener("click", changeRatingElements);
+
+      document.addEventListener("mouseover", changeRatingElements);
+
+      document.addEventListener("mouseout", changeRatingElements);
+
+      function changeRatingElements(event)
+      {
+        if (event.target.tagName !== "LI") return;
+
+        let ratingId = parseFloat(event.target.id.slice(-1));
+
+        for (i = 0; i <= ratingId; i++) {
+
+            switch (event.type){
+              case 'mouseover':
+                ratingElements[i].style.backgroundImage = 'url("rating/orangestar.png")';
+                break;
+              case 'mouseout':
+                if (ratingElements[i].isclicked) break;
+                ratingElements[i].style.backgroundImage = '';
+                break;
+              case 'click':
+                ratingElements[i].isclicked = true;
+                break;
+              default:
+                break;
+            }
+          }
+      }
+      </script>
+  </body>
+</html>

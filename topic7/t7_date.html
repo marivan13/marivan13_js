@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+    <style type="text/css">
+    .title
+    {
+      font-size: 30px;
+      text-align: center;
+      font-family: verdana;
+      margin-top: 100px;
+    }
+    .title2
+    {
+      padding-top: 30px;
+      font-size: 16px;
+    }
+    #background
+    {
+      background-color: #A9A9A9;
+    }
+    #fTime
+    {
+      color: #000080;
+    }
+    #lTime
+    {
+      color:#191970;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="background" class="title">
+      <div>До даты <span id="fTime"></span> осталось </div>
+      <div class="title2">Дней : Часов : Минут : Секунд</div>
+      <div><span id="lTime"><span></div>
+    </div>
+    <script type="text/javascript">
+
+     var rTime;
+     var dFinish = new Date(2017,6,12,18,0,0);
+
+     document.getElementById("fTime").innerHTML = dFinish.getFullYear()+ "/" + (dFinish.getMonth() + 1) + "/" + dFinish.getDate() +
+     "  " + dFinish.getHours() + ":00";
+
+     rTime = setInterval(remainTime,1000);
+
+      function remainTime()
+      {
+        let dNow = new Date();
+        let tRemain = dFinish - dNow;
+        let rSeconds = Math.floor((tRemain/1000)%60);
+        if (rSeconds < 10) rSeconds = "0" + rSeconds;
+        let rMinutes = Math.floor((tRemain/1000/60)%60);
+        if (rMinutes < 10) rMinutes = "0" + rMinutes;
+        let rHours = Math.floor((tRemain/(1000*60*60))%24);
+        let rDays = Math.floor(tRemain/(1000*60*60*24));
+
+        document.getElementById("lTime").innerHTML = rDays + " : " + rHours + " : " + rMinutes + " : " + rSeconds;
+
+        if (dNow === dFinish)
+        {
+          clearInterval(rTime);
+          return;
+        }
+     }
+
+    </script>
+  </body>
+</html>

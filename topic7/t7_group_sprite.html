@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+      <img src="png/car_1.png">
+      <img src="png/car_2.png">
+      <img src="png/car_3.png">
+      <img src="png/car_4.png">
+      <img src="png/car_5.png">
+      <script type="text/javascript">
+
+      var topImagePosition = 0;
+      var leftImagePsition = 0;
+      var idImage = 0;
+      var imagesToMove = {};
+
+      var images = document.getElementsByTagName("img");
+      for (image of images) {
+        image.style.position = "absolute";
+        topImagePosition+=100;
+        leftImagePsition+=100;
+        idImage+=1;
+        image.style.top = topImagePosition + "px";
+        image.style.left = leftImagePsition + "px";
+        image.id = "img"+idImage;
+
+        console.log(image);
+      }
+
+      document.addEventListener("click", function(event)
+      {
+        if (event.target.tagName !== "IMG") return;
+
+        let borderProp = parseFloat(getComputedStyle(event.target).border);
+        let imageID = event.target.id;
+
+        if (borderProp === 0){
+          event.target.style.border = "3px solid grey"
+          imagesToMove[imageID] = event.target;
+        }
+        else {
+          event.target.style.border = "";
+          delete imagesToMove[imageID];
+        }
+
+      });
+
+      document.addEventListener("keydown", function(event)
+      {
+        if (event.keyCode === 40){
+          moveImages(0, 5);
+        }
+
+        if (event.keyCode === 38) {
+          moveImages(0, -5);
+        }
+
+        if (event.keyCode === 39) {
+          moveImages(5, 0);
+        }
+
+        if (event.keyCode === 37) {
+          moveImages(-5, 0);
+        }
+      });
+
+      function moveImages(iLeftPosition, iTopPosition)
+      {
+        console.log(imagesToMove);
+        for (var img in imagesToMove) {
+
+          leftImagePsition = parseFloat(getComputedStyle(imagesToMove[img]).left);
+          topImagePosition = parseFloat(getComputedStyle(imagesToMove[img]).top);
+
+          leftImagePsition+=iLeftPosition;
+          topImagePosition+=iTopPosition;
+
+          imagesToMove[img].style.left = leftImagePsition + "px";
+          imagesToMove[img].style.top = topImagePosition + "px";
+        }
+      }
+      </script>
+  </body>
+</html>
