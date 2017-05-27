@@ -59,7 +59,7 @@
 
         document.getElementById("lTime").innerHTML = rDays + " : " + rHours + " : " + rMinutes + " : " + rSeconds;
 
-        if (dNow === dFinish)
+        if (tRemain < 0)
         {
           clearInterval(rTime);
           return;

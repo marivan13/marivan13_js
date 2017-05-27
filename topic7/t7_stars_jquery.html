@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+
+      #raiting_div{
+        margin-top: 100px;
+        margin-left: 100px;
+        float:left;
+        font-size: 0px; 
+      }
+
+      .rating-img{
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+  <div id="raiting_div">
+    <img id="rating1" src ="rating/whitestar.png" class="rating-img">
+    <img id="rating2" src ="rating/whitestar.png" class="rating-img">
+    <img id="rating3" src ="rating/whitestar.png" class="rating-img">
+    <img id="rating4" src ="rating/whitestar.png" class="rating-img">
+    <img id="rating5" src ="rating/whitestar.png" class="rating-img">
+  </div>
+      <script type="text/javascript">
+
+      var ratingIdClick = 0;
+
+      $('img').on({
+
+        mouseenter:function(){
+          var ratingId = parseFloat($(this).attr('id').slice(-1));
+          $('img').each(function(ratingCount){
+              if(ratingCount<ratingId){
+                $(this).attr("src","rating/orangestar.png");
+              }
+            });
+        },
+
+        mouseleave:function(){
+          $('img').each(function(ratingCount){
+            if (ratingCount < ratingIdClick){
+              $(this).attr("src","rating/orangestar.png");
+            }
+            else {
+              $(this).attr('src','rating/whitestar.png');
+            }
+            });
+        },
+
+        click:function(){
+          ratingIdClick = parseFloat($(this).attr('id').slice(-1));
+        }
+      });
+
+      </script>
+  </body>
+</html>
