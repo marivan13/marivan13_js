@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+
+    #slider_container{
+      position: relative;
+      overflow: hidden;
+      margin-top: 100px;
+      margin-left: 500px;
+      width: 200px;
+      height: 100px;
+    }
+
+    #slider{
+      position: absolute;
+      width:600px;
+      margin: 0;
+      padding: 0;
+      float:left;
+    }
+    img{
+      width:200px;
+      height:	100px;
+    }
+
+    </style>
+  </head>
+  <body>
+  <div id="slider_container">
+  </div>
+      <script type="text/javascript">
+
+      let sliderImages = [];
+
+      sliderImages.push('png/car_1.png');
+      sliderImages.push('png/car_2.png');
+      sliderImages.push('png/car_3.png');
+      sliderImages.push('png/car_4.png');
+      sliderImages.push('png/car_5.png');
+      sliderImages.push('png/car_6.png');
+      sliderImages.push('png/car_7.png');
+      sliderImages.push('png/car_8.png');
+      sliderImages.push('png/car_9.png');
+      sliderImages.push('png/car_10.png');
+      sliderImages.push('png/car_11.png');
+
+      $('#slider_container').append($('<div>').attr('id','slider'));
+
+      for (i = 0; i < sliderImages.length; i++) {
+        $('#slider').append($('<img>').attr('src',sliderImages[i]));
+      }
+
+       let sliderTimer = setInterval(function(){
+              $('#slider').animate({left:-200}, 4000, function(){
+                $(this).find("img:last").after($(this).find("img:first"));
+                $(this).css({left:0});
+              });
+      },10);
+
+      </script>
+  </body>
+</html>
