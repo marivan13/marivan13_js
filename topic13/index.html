@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style type='text/css'>
+    form{
+      background-color: #dfe3ee;
+      padding: 10px;
+      width: 450px;
+      font-family:sans-serif;
+    }
+    #title{
+      background-color: #3b5998;
+      color:white;
+      font-family: sans-serif;
+      padding: 10px;
+    }
+    #params{
+      background-color: #8b9dc3;
+      padding: 10px;
+      font-family: sans-serif;
+    }
+    #sort_params,#sum_params{
+      padding-left: 20px;
+    }
+    #file_div{
+      font-family: sans-serif;
+      background-color: #7187b4;
+      padding: 10px;
+    }
+   input[type=file]{
+      padding-top: 10px;
+      font-size: 16px;
+      height:20px;
+    }
+    input[type=submit]{
+      width:450px;
+      height: auto;
+      font-size: 30px;
+    }
+    #submit_div{
+      padding-top: 10px;
+    }
+  </style>
+  </head>
+  <body>
+    <form action="/game_load" enctype="multipart/form-data" method="post">
+    <div id='title'> SUPER LOTO PARAMETERS </div>
+    <div id='params'>
+      <input type="radio" name="game_params" value="norm" checked>Normalize ball numbers<br>
+      <input type="radio" name="game_params" value="sort">Sort games by ball numbers
+          <div id='sort_params'>
+            <input type="radio" name="game_params_sort" value="asc">Ascending<br>
+            <input type="radio" name="game_params_sort" value="desc">Descending<br>
+         </div>
+      <input type="radio" name="game_params" value="sum">Select game with summary of ball numbers
+        <div id='sum_params'>
+          <input type="radio" name="game_params_sum" value="max">Max<br>
+          <input type="radio" name="game_params_sum" value="min">Min<br>
+        </div>
+      <input type="radio" name="game_params" value="stat">Count numbers of balls in games
+      <input type="number" name="stat_rows"><br>
+    </div>
+    <div id='file_div'>Select file with loto results:<br>
+      <input type="file" name="game_result_file" multiple="multiple">
+    </div>
+    <div id='submit_div'>
+      <input type="submit" value="OK">
+    </div>
+    </form>
+    <script type='text/javascript'>
+      $(':radio[name="game_params_sort"]').on('click', function(){
+        $(':radio[value="sort"]').prop('checked',true);
+        $(':radio[name="game_params_sum"]').prop('checked',false);
+      });
+
+      $(':radio[name="game_params_sum"]').on('click', function(){
+        $(':radio[value="sum"]').prop('checked',true);
+        $(':radio[name="game_params_sort"]').prop('checked',false);
+      });
+
+      $(':radio').on('click',function(){
+        if ($(this).val() === 'sort'){
+            $(':radio[value="asc"]').prop('checked',true);
+            $(':radio[name="game_params_sum"]').prop('checked',false);
+            return;
+        }
+        if ($(this).val() === 'sum'){
+          $(':radio[value="max"]').prop('checked',true);
+          $(':radio[name="game_params_sort"]').prop('checked',false);
+          return;
+        }
+        if ($(this).val() === 'norm' || $(this).val() === 'stat'){
+          $(':radio[name="game_params_sort"]').prop('checked',false);
+          $(':radio[name="game_params_sum"]').prop('checked',false);
+          return;
+        }
+      });
+    </script>
+  </body>
+</html>
