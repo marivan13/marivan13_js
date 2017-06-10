@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+
+      .slider_container {
+        position: relative;
+        overflow: hidden;
+        height: 100px;
+				margin-top: 100px;
+      }
+
+			#slider_container_first{
+				margin-left: 300px;
+				width: 600px;
+			}
+
+			#slider_container_second{
+				margin-left: 500px;
+				width: 200px;
+			}
+
+			#slider_container_third{
+				margin-left: 100px;
+				width: 1200px;
+			}
+
+      .slider{
+        position: absolute;
+        width:1000px;
+        margin: 0;
+        padding: 0;
+        float:left;
+      }
+      img{
+        width:200px;
+        height:	100px;
+      }
+
+    </style>
+  </head>
+  <body>
+  <div id="slider_container_first" class="slider_container">
+  </div>
+	<div id="slider_container_second" class="slider_container">
+	</div>
+	<div id=slider_container_third class="slider_container">
+	</div>
+      <script type="text/javascript">
+
+      $('#slider_container_first').append($('<div>').attr('id','slider_first'));
+			$('#slider_first').attr('class','slider');
+			$('#slider_container_second').append($('<div>').attr('id','slider_second'));
+			$('#slider_second').attr('class','slider');
+			$('#slider_container_third').append($('<div>').attr('id','slider_third'));
+
+			$.getJSON('slider_images.json', function(data){
+					$.each(data.images, function (i, image) {
+						$('#slider_first').append($('<img>').attr('src',image.src));
+						 if (image.topic === 'topic2'){
+							 $('#slider_second').append($('<img>').attr('src',image.src));
+						 }
+					});
+			});
+
+       let sliderTimer = setInterval(function(){
+              $('#slider_first, #slider_second').animate({left:-200}, 4000, function(){
+                $(this).find("img:last").after($(this).find("img:first"));
+                $(this).css({left:0});
+              });
+
+      },10);
+
+			var httpReq = new XMLHttpRequest();
+
+			httpReq.onreadystatechange = function(){
+				if (httpReq.readyState == 4 && httpReq.status == 200) {
+					var data = JSON.parse(httpReq.responseText);
+					for (image of data.images) {
+						if (image.tag === "BMW"){
+						$('#slider_third').append($('<img>').attr('src',image.src));
+						}
+					}
+				}
+			};
+
+			httpReq.open('get', '/slider_images');
+			httpReq.send();
+
+      </script>
+  </body>
+</html>
