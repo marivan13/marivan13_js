@@ -59,14 +59,8 @@
                 var data = JSON.parse(search_result);
                   fillSearch(data.items);
             }
+          });
         });
-      });
-
-      $('#search_list').click(function(event) {
-          $('#search_input').val($(event.target).html());
-              console.log($(event.target));
-      });
-
 
       function fillSearch(items){
         $('#search_list > li').remove();
