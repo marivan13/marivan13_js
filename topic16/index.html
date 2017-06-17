@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+
+    body {
+      font-family: sans-serif;
+    }
+    #main_div{
+      margin-left: 40%;
+    }
+    #div_form, #div_params {
+      padding: 10px;
+      width: 800px;
+    }
+
+    input[type=text]{
+    width: 278px;
+    padding: 12px 10px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+  }
+  input[type=radio] {
+    margin: 5px 5px;
+  }
+  button {
+    width: 300px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+  }
+  #div_method_submit, #div_ajax_submit {
+    background-color: #4CAF50;
+    width: 300px;
+    height: 40px;
+  }
+  .p_label{
+    color: white;
+    padding: 13px 137px;
+    font-size: 11px;
+  }
+  .p_validation_message{
+    color:red;
+    font-size: 11px;
+  }
+
+    </style>
+  </head>
+  <body>
+  <div id='main_div'>
+   <div id='div_params'>
+      <input type="radio" name="submit_params" value="browser_submit" checked>Browser submit<br>
+      <input type="radio" name="submit_params" value="method_submit">Method submit<br>
+      <input type="radio" name="submit_params" value="ajax_submit">Ajax submit<br>
+   </div>
+   <div id='div_form'>
+       <form action="/load_data" method="get" id='validate_form'>
+         <label><b>Surname Name</b></label><br>
+         <input type="text" placeholder="Enter Surname Name" name="uname"><br>
+         <label><b>Email</b></label><br>
+         <input type="text" placeholder="Enter email" name="email"><br>
+         <label><b>Birthday Date</b></label><br>
+         <input type="text" placeholder="Enter birthday date" name="bdate"><br>
+         <label><b>Phone number</b></label><br>
+          <input type="text" placeholder="Enter phone number" name="phone"><br>
+         <button type="submit" id='button_browser_submit'>Save</button>
+         <div id='div_ajax_submit'><p class='p_label'>Save</p></div>
+         <div id='div_method_submit'><p class=p_label>Save</p></div>
+       </form>
+   </div>
+  </div>
+      <script type="text/javascript">
+
+      $('#div_ajax_submit, #div_method_submit').hide();
+
+      $(':radio').on('click', function(){
+        if ($(this).val() === 'method_submit'){
+          $('#button_browser_submit, #div_ajax_submit').hide();
+          $('#div_method_submit').show();
+        }
+        if ($(this).val() === 'browser_submit'){
+          $('#div_ajax_submit, #div_method_submit').hide();
+          $('#button_browser_submit').show();
+        }
+        if ($(this).val() === 'ajax_submit'){
+          $('#button_browser_submit, #div_method_submit').hide();
+          $('#div_ajax_submit').show();
+        }
+      });
+
+      //submit
+      $('#validate_form').submit(function(event){
+          if (validateForm()) {
+            return;
+          }
+          console.log('check correct input values');
+          event.preventDefault();
+      });
+
+      //method submit
+      $('#div_method_submit').on('click', function(event){
+        if (validateForm()) {
+          $('#validate_form').submit();
+        }
+        else{
+          console.log('check correct input values');
+          event.preventDefault();
+        }
+      });
+
+
+      //ajax
+      $('#div_ajax_submit').on('click', function(event){
+        if (validateForm()) {
+            $.ajax({url:'/load_data',
+                    data: {uname: $('input[name="uname"]').val(),
+                           email:$('input[name="email"]').val(),
+                           bdate: $('input[name="bdate"]').val(),
+                           phone: $('input[name="phone"]').val()},
+                    success: function(result){
+                        console.log(result);
+                        $("#main_div").after(result);
+            }});
+        }
+        else {
+          console.log('check correct input values');
+          event.preventDefault();
+        }
+      });
+
+
+      $('input:text').on('focus', function() {
+          $(this).css('outline','');
+      });
+
+
+      //validation
+      function validateForm(){
+        let isValidated = true;
+
+        clearValidation();
+        if (isEmptyInputs()) return false;
+
+        // move to const need
+        let rg_uname = new RegExp('^[a-zA-z\\s]+$');
+        let rg_email = new RegExp('^[\\w.+]+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$');
+        let rg_bdate = new RegExp('((([0][1-9]|[12][\\d])|[3][01])[-/]([0][13578]|[1][02])[-/][1-9]\\d\\d\\d)|((([0][1-9]|[12][\\d])|[3][0])[-/]([0][13456789]|[1][012])[-/][1-9]\\d\\d\\d)|(([0][1-9]|[12][\\d])[-/][0][2][-/][1-9]\\d([02468][048]|[13579][26]))|(([0][1-9]|[12][0-8])[-/][0][2][-/][1-9]\\d\\d\\d)');
+        let rg_phone = new RegExp('^\\(\\d{3}\\) ?\\d{3}( |-)?\\d{4}|^\\d{3}( |-)?\\d{3}( |-)?\\d{4}');
+
+        if (!rg_uname.test($('input[name="uname"]').val())){
+          isValidated = false;
+          $('input[name="uname"]').css('outline', '1px solid red')
+                        .after('<span class="p_validation_message"> Please, enter only letters. For example "Ivanov Ivan"</span>');
+        }
+
+        if (!rg_email.test($('input[name="email"]').val())){
+          isValidated = false;
+          $('input[name="email"]').css('outline', '1px solid red')
+                        .after('<span class="p_validation_message"> Please, enter email correctly. For example "ivanov@gmail.com"</span>');
+        }
+
+        if (!rg_bdate.test($('input[name="bdate"]').val())){
+          isValidated = false;
+          $('input[name="bdate"]').css('outline', '1px solid red')
+                        .after('<span class="p_validation_message"> Please, enter date correctly. For example "31/12/2010" or "31-12-2010"</span>');
+        }
+
+        if (!rg_phone.test($('input[name="phone"]').val())){
+          isValidated = false;
+          $('input[name="phone"]').css('outline', '1px solid red')
+                        .after('<span class="p_validation_message"> Please, enter phone correctly. For example "(093)123-4567" or 0931234567</span>');
+        }
+        return isValidated;
+      }
+
+     function isEmptyInputs(){
+        var is_empty = false;
+        $.each($('input:text'), function (i, element){
+          if (element.value == null || element.value === ''){
+            $(element).css('outline', '1px solid red')
+                      .after('<span class="p_validation_message"> Please, enter the value</span>');
+            is_empty = true;
+          }
+        });
+        return is_empty;
+      }
+
+      function clearValidation(){
+        $(':text').css('outline','');
+        $('.p_validation_message').remove();
+      }
+
+</script>
+</body>
+</html>
