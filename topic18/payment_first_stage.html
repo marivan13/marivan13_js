@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scheblykina</title>
+      <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <div id='main_container'>
+      <div id='payment_container'>
+        <div class="step" id="first_step">
+    			<div class="step_number"><span>1</span></div>
+    			<div class="title">
+    				<h4>Номер мобильного телефона</h4>
+    			</div>
+          <div class="content" id="payment_mobile_num">
+                <span>+38</span>
+                      <div id="mobile_operator">050</div>
+                      <ul id='mobile_operator_list'></ul>
+                <input type="text" name="mobile_num" id="mobile_num" placeholder="xxx xx xx" required="true" title='Введите номер мобильного телефона'>
+          </div>
+    		</div>
+        <div class="step" id="second_step">
+    			<div class="step_number"><span>2</span></div>
+    			<div class="title">
+    				<h4>Сумма пополнения</h4>
+    			</div>
+          <div class="content" id="payment_mobile_sum">
+                <input type="button" value="50" class='payment_sum_default'>
+                <input type="button" value="100" class='payment_sum_default'>
+                <input type="button" value="200" class='payment_sum_default'>
+                <input type="text" id="mobile_sum" required="true" title='Введите сумму пополнения'><span> грн</span>
+          </div>
+    		</div>
+        <div class="step" id="third_step">
+    			<div class="step_number"><span>3</span></div>
+    			<div class="title">
+    				<h4>Платёжная система</h4>
+    			</div>
+          <div class="content" id="payment_system">
+            <div>
+      					<input type="radio" name='payment_system' value="privat" checked='true'>
+                <img class='payment_img' id='privat_img'>
+            </div>
+            <div>
+      					<input type="radio" name='payment_system' value="portmone">
+                <img class='payment_img' id='portmone_img'>
+            </div>
+            <div>
+      					<input type="radio" name='payment_system' value="easy_pay">
+                <img class='payment_img' id='easy_pay_img'>
+            </div>
+      	 </div>
+    		</div>
+        <input type="button" value="Далее" id='first_stage_finish'>
+      </div>
+      <script type="text/javascript" src='/js/main.js'></script>
+</script>
+</body>
+</html>
+  </body>
+</html>
